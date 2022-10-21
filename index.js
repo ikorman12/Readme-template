@@ -5,25 +5,55 @@ inquirer
   .prompt([
     {
       type: 'input',
-      message: 'What is your name?',
-      name: 'name',
+      message: 'What is the Title of your project?!',
+      name: 'title',
     },
     {
       type: 'input',
-      message: 'What language(s) do you speak?',
-      name: 'language',
+      message: 'What is the purpose for your project? What goal are you trying to achieve?',
+      name: 'goal',
     },
     {
       type: 'input',
-      message: 'What is your preferred method of communication',
-      name: 'communication',
+      message: 'Describe your porject in 2-3 sentences',
+      name: 'desc',
     },
     {
-        type:'checkbox',
-        message: 'whose the coolest?',
-        name: 'choices', 
-        choices:['iron-man', 'spider-man', 'Thanos', 'igor']
-    }
+        type: 'input',
+        message: 'Future implementations for your project in 2-3 sentences',
+        name: 'futr',
+      },
+      {
+        type: 'input',
+        message: 'What are you helping your user achieve? what will the future of your project doo to solve this problem even more efficiently',
+        name: 'about',
+      },
+      {
+        type: 'input',
+        message: 'url for github',
+        name: 'git',
+      },
+      {
+        type: 'input',
+        message: 'project launched page link',
+        name: 'web',
+      },
+      {
+        type: 'input',
+        message: 'Who was present on your project? name them all',
+        name: 'collab',
+      },
+      {
+        type: 'input',
+        message: 'How would you like people to contribute to your project?',
+        name: 'contribute',
+      },
+    // {
+    //     type:'checkbox',
+    //     message: 'whose the coolest?',
+    //     name: 'choices', 
+    //     choices:['iron-man', 'spider-man', 'Thanos', 'igor']
+    // }
   ])
 
   .then((response) => {
@@ -34,22 +64,31 @@ inquirer
 
 //create file
 function createFile(response){
-    fs.writeFile('Myprofile.html',
-    `<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-    <body>
-        <h1>${response.name}</h1>
-        <h2>${response.language}</h1>
-    </body>
-    <script src="./index.js"> </script>
-    </html>
+    fs.writeFile('README.md',
+    ` 
+    ### ${response.title}
+
+    ## Description
+
+    ${response.goal}
+
+    ${response.desc}. ${response.futr}. ${response.about}
+
+    ## Links
+
+    Github: ${response.git}
+    URL: ${response.web}
+
+    ## Credits
+
+    ${response.collab}
     
+    ## License 
+
+
+    ## How to contribute
+
+    ${response.contribute}
     `,
     (err) => console.log(err))
 }
