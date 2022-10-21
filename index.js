@@ -48,12 +48,12 @@ inquirer
         message: 'How would you like people to contribute to your project?',
         name: 'contribute',
       },
-    // {
-    //     type:'checkbox',
-    //     message: 'whose the coolest?',
-    //     name: 'choices', 
-    //     choices:['iron-man', 'spider-man', 'Thanos', 'igor']
-    // }
+    {
+        type:'checkbox',
+        message: 'What kind of license would you like to show?',
+        name: 'license', 
+        choices:['MIT', 'ISC', 'Mozilla', 'IBM']
+    }
   ])
 
   .then((response) => {
@@ -64,31 +64,30 @@ inquirer
 
 //create file
 function createFile(response){
-    fs.writeFile('README.md',
-    ` 
-    ### ${response.title}
+    fs.writeFile('README.md', 
+    `# ${response.title}
 
-    ## Description
+## Description
 
-    ${response.goal}
+${response.goal}
+${response.desc}. ${response.futr}. ${response.about}
 
-    ${response.desc}. ${response.futr}. ${response.about}
+## Links
 
-    ## Links
+Github: ${response.git}
+URL: ${response.web}
 
-    Github: ${response.git}
-    URL: ${response.web}
+## Credits
 
-    ## Credits
-
-    ${response.collab}
+${response.collab}
     
-    ## License 
+## License 
 
+${response.license}
 
-    ## How to contribute
+## How to contribute
 
-    ${response.contribute}
-    `,
+${response.contribute}
+`,
     (err) => console.log(err))
 }
